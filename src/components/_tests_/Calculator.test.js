@@ -15,8 +15,7 @@ describe('The Calculator component', () => {
 
       it('the subtract function subtracts two numbers', () => { 
         expect(subtract(3, 1)).toBe(2);
-        console.log(subtract(-1, 3))
-        expect(subtract(-1, 3)).tobe(-4);
+        expect(subtract(-1, 3)).toBe(-4);
       });
   });
 
