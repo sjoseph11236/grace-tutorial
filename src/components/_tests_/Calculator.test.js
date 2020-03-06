@@ -33,7 +33,9 @@ describe('The Calculator component', () => {
     });
 
     if('has two forms to input the numbers used in the calculator', () => { 
-      e
+      const { getAllByRole } = render(<Calculator />);
+      const forms = getAllByRole('input');
+      expect(forms).toBe()
     });
   });
 });
