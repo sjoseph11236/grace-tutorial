@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, prettyDOM, getRoles, getByDisplayValue, fireEvent } from '@testing-library/React';
+import { render, prettyDOM,  fireEvent } from '@testing-library/React';
 import { add } from '../utils/calculations';
 import Calculator from '../Calculator';
 
@@ -32,12 +32,12 @@ describe('The Calculator component', () => {
       })).toBeTruthy();
     });
 
-    it('has two forms to input the numbers used in the calculator', () => { 
+    it('has two inputs to input the numbers used in the calculator', () => { 
       const { container, getAllByRole } = render(<Calculator />);
-      const forms = getAllByRole('textbox');
+      const inputs = getAllByRole('textbox');
       // tool for identifing roles
       // console.log('>>>', getRoles(container));
-      expect(forms).toHaveLength(2);
+      expect(inputs).toHaveLength(2);
     });
 
     it('has ids of numOne and numTwo and are set to 0 as default values', () => { 
