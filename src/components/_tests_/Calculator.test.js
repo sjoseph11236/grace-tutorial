@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, prettyDOM, getRoles, getByDisplayValue } from '@testing-library/React';
+import { render, prettyDOM, getRoles, getByDisplayValue, fireEvent } from '@testing-library/React';
 import { add } from '../utils/calculations';
 import Calculator from '../Calculator';
 
@@ -56,6 +56,24 @@ describe('The Calculator component', () => {
       const { getByText } = render(<Calculator />);
       expect(getByText((content, element) => {
         return element.id === 'calcButton' && content === '=';
+      })).toBeTruthy();
+    });
+
+    it('can add two numbers together by filling in the number froms and hitting the calculate button', () => { 
+      // creates a fake virtual DOM
+      const { getAllByRole, getByText } = render(<Calculator />);
+      const expectations = { 
+        numOne: 1, 
+        numTwo: 2
+      }
+      const inputs = getAllByRole('textbox');
+      inputs.forEach(input => { 
+        fireEvent.change(input, { target: { value: expectations[input.id]}})
+      });
+      // simulating a click on the first element with that getByText
+      fireEvent.click(getByText('='));
+      expect(getByText((content, element) => { 
+        return element.className === 'result' && Number(content) === 3;
       })).toBeTruthy();
     });
   });
