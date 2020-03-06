@@ -4,5 +4,7 @@ import App from './App';
 
 test('renders learn react link', () => {
   const { getByText } = render(<App />);
-
+  expect(getByText((content, element) => {
+    return element.id.toLowerCase() === 'calculator';
+  })).toBeTruthy();
 });
