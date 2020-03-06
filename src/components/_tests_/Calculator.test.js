@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, prettyDOM } from '@testing-library/React';
+import { render, prettyDOM, getRoles, getByDisplayValue } from '@testing-library/React';
 import { add } from '../utils/calculations';
 import Calculator from '../Calculator';
 
@@ -32,10 +32,31 @@ describe('The Calculator component', () => {
       })).toBeTruthy();
     });
 
-    if('has two forms to input the numbers used in the calculator', () => { 
-      const { getAllByRole } = render(<Calculator />);
-      const forms = getAllByRole('input');
-      expect(forms).toBe()
+    it('has two forms to input the numbers used in the calculator', () => { 
+      const { container, getAllByRole } = render(<Calculator />);
+      const forms = getAllByRole('textbox');
+      // tool for identifing roles
+      // console.log('>>>', getRoles(container));
+      expect(forms).toHaveLength(2);
+    });
+
+    it('has ids of numOne and numTwo and are set to 0 as default values', () => { 
+      const { getByDisplayValue } = render(<Calculator />);
+      
+      expect(getByDisplayValue((value, element) => {
+        return element.id === 'numOne' && Number(value) === 0;
+      }));
+
+      expect(getByDisplayValue((value, element) => {
+        return element.id === 'numTwo' && Number(value) === 0;
+      }));
+    });
+
+    it('renders a calculate button represented by =', ()=> { 
+      const { getByText } = render(<Calculator />);
+      expect(getByText((content, element) => {
+        return element.id === 'calcButton' && content === '=';
+      })).toBeTruthy();
     });
   });
 });
