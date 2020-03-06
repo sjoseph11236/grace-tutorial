@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, prettyDOM,  fireEvent } from '@testing-library/React';
-import { add } from '../utils/calculations';
+import { add, subtract } from '../utils/calculations';
 import Calculator from '../Calculator';
 
 describe('The Calculator component', () => { 
@@ -11,6 +11,12 @@ describe('The Calculator component', () => {
         // toBe is matcher 
         // expect is assertion
         expect(add(-1,3)).toBe(2);
+      });
+
+      it('the subtract function subtracts two numbers', () => { 
+        expect(subtract(3, 1)).toBe(2);
+        console.log(subtract(-1, 3))
+        expect(subtract(-1, 3)).tobe(-4);
       });
   });
 
