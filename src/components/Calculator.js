@@ -26,7 +26,6 @@ const Calculator = () => {
         <input 
           type='text'
           id='numTwo'
-
           value={numTwo}
           onChange={evt => setNumTwo(evt.target.value)}
         />
